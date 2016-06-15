@@ -11,8 +11,9 @@ app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
-app.post('/list', function(req, res) {
+app.post('/', function(req, res) {
     var user = req.body.user;
+    console.log('user', user);
     MongoClient.connect(url, function(err, db) {
         var collection = db.collection('bucket_list');
         collection.find({user: user}).toArray(function(err, docs) {
@@ -22,15 +23,34 @@ app.post('/list', function(req, res) {
     });
 });
 
-app.post('/save', function(req, res) {
+app.post('/country', function(req, res) {
+    console.log('body', req.body);
     var user = req.body.user;
     var country = req.body.country;
+    console.log('u', user);
+    console.log('c', country);
     MongoClient.connect(url, function(err, db) {
         var collection = db.collection('bucket_list');
-        collection.update({user:user}, {$push:{list: element.trim()}}, {upsert:true});
+        collection.update({user:user}, {$push:{countries: country}}, {upsert:true});
         db.close();
     });
+    res.status(200).end();
 });
+
+app.delete('/country', function(req, res) {
+    console.log('body', req.body);
+    var user = req.body.user;
+    var country = req.body.country;
+    console.log('u', user);
+    console.log('c', country);
+    MongoClient.connect(url, function(err, db) {
+        var collection = db.collection('bucket_list');
+        collection.update({user:user}, {$pull:{countries: {country: country}}});
+        db.close();
+    });
+    res.status(200).end();
+});
+
 
 // app.get('/accounts', function (req, res) {
 //     MongoClient.connect(url, function(err, db) {
