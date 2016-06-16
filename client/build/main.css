@@ -29,6 +29,8 @@ h1 {
 }
 #user-form {
     font-size: 30px;
+    display: table-cell;
+    vertical-align: top;
 }
 
 #user-input {
@@ -51,12 +53,13 @@ h1 {
 #map {
     width: 500px;
     height: 400px;
-    display: inline-block;
+    display: table-cell;
+    vertical-align: top;
 }
 
 #select-countries {
-    display: inline-block;
-    position: relative;
+    display: table-cell;
+    vertical-align: top;
 }
 
 

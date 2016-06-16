@@ -1,10 +1,7 @@
 var Map = function (container){
     this.map = new google.maps.Map(container, {center: {lat: 4, lng: 4}, zoom: 1});
     this.markers = [];
-    this.infowindows = [];
-
 };
-
 Map.prototype ={
     addMarker: function(latlng, name){
         this.markers.push(new google.maps.Marker({
@@ -21,9 +18,5 @@ Map.prototype ={
         }
         this.markers = [];
     }
-
-
-
 };
-
 module.exports = Map;

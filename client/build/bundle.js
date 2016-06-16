@@ -47,179 +47,16 @@
 	var Request = __webpack_require__(2);
 	var Page = __webpack_require__(3);
 	
-	
 	var main = function() {
 	    var map = null;
 	    var request = new Request();
 	    var page = new Page(request, map);
 	    page.mainCallback = main;
-	    console.log('mc', page.mainCallback);
 	    var user = localStorage.getItem('user');
 	    var log = document.getElementById('login');
-	
 	    request.grabCountryData();
 	    page.decide(user, log);
 	};
-	//
-	// var updateDisplay = function() {
-	//     if (map) {
-	//         map.clearMarkers();
-	//     } else {
-	//         map = new Map(document.getElementById("map"));
-	//     }
-	//     var curCountries = document.getElementById('current-countries');
-	//     curCountries.innerHTML = "";
-	//     document.getElementById('country-search').value = null;
-	//     var request = new XMLHttpRequest();
-	//     request.open('POST', "");
-	//     request.setRequestHeader('Content-Type', 'application/json');
-	//     request.onload = function() {
-	//         if (request.status === 200) {
-	//             var d = JSON.parse(request.responseText);
-	//             var data = d[0];
-	//             if (data) {
-	//                 for (var i = 0; i < data.countries.length; i++) {
-	//                     var latlng = {lat:data.countries[i].latlng[0], lng:data.countries[i].latlng[1]};
-	//                     map.addMarker(latlng, data.countries[i].country);
-	//
-	//                     var li = document.createElement('li');
-	//                     li.innerText = data.countries[i].country;
-	//
-	//                     var del = document.createElement('b');
-	//                     del.innerText = "X";
-	//                     del.addEventListener('click', deleteCountry);
-	//
-	//                     li.appendChild(del);
-	//                     curCountries.appendChild(li);
-	//
-	//                 }
-	//             }
-	//         }
-	//     };
-	//     request.send(JSON.stringify({user: localStorage.getItem("user")}));
-	// };
-	//
-	// var deleteCountry = function(e) {
-	//     var country = e.target.parentNode.childNodes[0].nodeValue;
-	//
-	//     var request = new XMLHttpRequest();
-	//     request.open('DELETE', 'country');
-	//     request.setRequestHeader('Content-Type', 'application/json');
-	//     request.onload = function() {
-	//         if (request.status === 200) {
-	//             updateDisplay();
-	//         }
-	//     };
-	//     request.send(JSON.stringify({user: localStorage.getItem("user"), country: country}));
-	//
-	//
-	// };
-	//
-	//
-	// var displayPage = function(pageUrl, callback) {
-	//     var request = new XMLHttpRequest();
-	//     request.open('GET', pageUrl);
-	//     request.onload = function() {
-	//         if (request.status === 200) {
-	//             callback(request.responseText);
-	//         }
-	//     };
-	//     request.send(null);
-	// };
-	//
-	//
-	// var setupLogin = function(data) {
-	//     document.getElementById('content').innerHTML = data;
-	//
-	//     var form = document.getElementById('user-form');
-	//     form.addEventListener('submit', function(e) {
-	//         e.preventDefault();
-	//         var username = document.getElementById('user-input').value;
-	//         localStorage.setItem('user', username.toLowerCase());
-	//         main();
-	//     });
-	//
-	// };
-	//
-	// var clearElement = function(elementName) {
-	//     document.getElementById(elementName).innerHTML = null;
-	// };
-	//
-	// var setupMain = function(data) {
-	//     document.getElementById('content').innerHTML = data;
-	//
-	//     var countryData = JSON.parse(localStorage.getItem('countryData'));
-	//     var searchBox = document.getElementById('country-search');
-	//
-	//     searchBox.addEventListener('keyup', function(e) {
-	//         var span = document.getElementById('country-options');
-	//         span.innerHTML = null;
-	//         for (var i = 0; i < countryData.length; i++) {
-	//             if (countryData[i].name.toLowerCase().indexOf(searchBox.value.toLowerCase()) > -1) {
-	//                 span.appendChild(createListOption(countryData[i].name));
-	//             }
-	//         }
-	//         if (span.childNodes.length === 0) {
-	//             var p = document.createElement('p');
-	//             p.innerText = "Sorry no results...";
-	//             span.appendChild(p);
-	//         }
-	//     });
-	//
-	//     updateDisplay();
-	//
-	// };
-	//
-	// var createListOption = function(countryName) {
-	//     var p = document.createElement('p');
-	//     p.innerText = countryName;
-	//     p.addEventListener('click', pClickHandler);
-	//     return p;
-	// };
-	//
-	// var pClickHandler = function(e) {
-	//     var me = e.target;
-	//     var request = new XMLHttpRequest();
-	//     request.open('POST', "country");
-	//     request.setRequestHeader('Content-Type', 'application/json');
-	//     request.onload = function() {
-	//         if (request.status === 200) {
-	//             updateDisplay();
-	//         }
-	//     };
-	//     var test = {
-	//         user: localStorage.getItem('user'),
-	//         country: {country: me.innerText, latlng: findLatLng(me.innerText)}
-	//     };
-	//     request.send(JSON.stringify(test));
-	//
-	//     clearElement('country-options');
-	//
-	// };
-	//
-	// var findLatLng = function(countryName) {
-	//     var countryData = JSON.parse(localStorage.getItem('countryData'));
-	//     for (var i = 0; i < countryData.length; i++) {
-	//         if (countryData[i].name === countryName) {
-	//             return countryData[i].latlng;
-	//         }
-	//     }
-	// };
-	//
-	// var grabCountryData = function() {
-	//     if (!localStorage.getItem('countryData')) {
-	//         var request = new XMLHttpRequest();
-	//         request.open('GET', "http://restcountries.eu/rest/v1/all");
-	//         request.onload = function() {
-	//             if (request.status === 200) {
-	//                 localStorage.setItem('countryData', JSON.stringify(JSON.parse(request.responseText)));
-	//             }
-	//         };
-	//         request.send(null);
-	//     }
-	// };
-	
-	
 	
 	window.onload = main;
 
@@ -231,10 +68,7 @@
 	var Map = function (container){
 	    this.map = new google.maps.Map(container, {center: {lat: 4, lng: 4}, zoom: 1});
 	    this.markers = [];
-	    this.infowindows = [];
-	
 	};
-	
 	Map.prototype ={
 	    addMarker: function(latlng, name){
 	        this.markers.push(new google.maps.Marker({
@@ -251,11 +85,7 @@
 	        }
 	        this.markers = [];
 	    }
-	
-	
-	
 	};
-	
 	module.exports = Map;
 
 
@@ -263,24 +93,19 @@
 /* 2 */
 /***/ function(module, exports) {
 
-	var Request = function() {
-	    this.test = "hello";
-	};
-	
+	var Request = function() {};
 	Request.prototype = {
-	    do: function(type, url, callback, dataToSend) {
-	        console.log(this.test);
+	    do: function(type, url, callback, dataToSend, context) {
 	        var request = new XMLHttpRequest();
+	        request.onload = function() {
+	            if (request.status === 200) {
+	                callback(this.responseText, context);
+	            }
+	        };
 	        request.open(type, url);
 	        if (type != "GET") {
 	            request.setRequestHeader('Content-Type', 'application/json');
 	        }
-	        request.onload = function() {
-	            if (request.status === 200) {
-	                console.log('r',this);
-	                callback(request.responseText);
-	            }
-	        };
 	        if (dataToSend) {
 	            dataToSend = JSON.stringify(dataToSend);
 	        } else {
@@ -296,8 +121,6 @@
 	        }
 	    }
 	};
-	
-	
 	module.exports = Request;
 
 
@@ -306,51 +129,131 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var Map = __webpack_require__(1);
-	
+	var MainPage = __webpack_require__(4);
 	var Page = function(request, map) {
 	    this.request = request;
 	    this.map = map;
 	    this.mainCallback = null;
-	    this.test = "bunny";
+	    this.main = new MainPage(this);
 	};
-	
 	Page.prototype = {
-	
-	    display: function(pageUrl, callback) {
-	        this.request.do('GET', pageUrl, callback);
+	    display: function(pageUrl, callback, context) {
+	        this.request.do('GET', pageUrl, callback, null, context);
 	    },
 	    decide: function(user, log) {
-	        console.log(this);
 	        if (user) {
-	            this.display('main.html', this.setupMain);
-	            log.innerText = "Logout";
+	            this.display('main.html', this.main.setup, this.main);
+	            log.innerText = "Hey " + localStorage.getItem('user') + " - Logout?";
 	            log.addEventListener('click', function(e) {
 	                e.preventDefault();
 	                localStorage.removeItem('user');
 	                this.map = null;
-	                console.log('ct', this);
 	                this.mainCallback();
 	            }.bind(this));
 	        } else {
-	            this.display('login.html', this.setupLogin);
+	            this.display('login.html', this.setupLogin, this);
 	            log.innerText = null;
 	        }
 	    },
-	    setupLogin: function(data) {
+	    setupLogin: function(data, context) {
 	        document.getElementById('content').innerHTML = data;
-	
-	        var form = document.getElementById('user-form');
-	        form.addEventListener('submit', function(e) {
+	        document.getElementById('user-form').addEventListener('submit', function(e) {
 	            e.preventDefault();
 	            var username = document.getElementById('user-input').value;
 	            localStorage.setItem('user', username.toLowerCase());
-	            console.log("no redirect - refresh page");
-	            // console.log(this);
-	            // console.log(this.mainCallback);
+	            context.mainCallback();
 	        }.bind(Page));
 	    },
-	    setupMain: function(data) {
-	        console.log('a',this.test);
+	    // setupMain: function(data, context) {
+	    //     document.getElementById('content').innerHTML = data;
+	    //
+	    //     var countryData = JSON.parse(localStorage.getItem('countryData'));
+	    //     var searchBox = document.getElementById('country-search');
+	    //
+	    //     searchBox.addEventListener('keyup', function(e) {
+	    //         var span = document.getElementById('country-options');
+	    //         span.innerHTML = null;
+	    //         for (var i = 0; i < countryData.length; i++) {
+	    //             if (countryData[i].name.toLowerCase().indexOf(searchBox.value.toLowerCase()) > -1) {
+	    //                 span.appendChild(context.createListOption(countryData[i].name));
+	    //             }
+	    //         }
+	    //         if (span.childNodes.length === 0) {
+	    //             var p = document.createElement('p');
+	    //             p.innerText = "Sorry no results...";
+	    //             span.appendChild(p);
+	    //         }
+	    //     }.bind(this));
+	    //     context.updateDisplay(null, context);
+	    // },
+	    createListOption: function(countryName) {
+	        var p = document.createElement('p');
+	        p.innerText = countryName;
+	        p.addEventListener('click', this.pClickHandler.bind(this));
+	        return p;
+	    },
+	    pClickHandler: function(e) {
+	        var me = e.target;
+	        var countryData = {
+	            user: localStorage.getItem('user'),
+	            country: {country: me.innerText, latlng: this.findLatLng(me.innerText)}
+	        };
+	        this.request.do("POST", "country", this.updateDisplay, countryData, this);
+	        document.getElementById('country-options').innerHTML = null;
+	    },
+	    findLatLng: function(countryName) {
+	        var countryData = JSON.parse(localStorage.getItem('countryData'));
+	        for (var i = 0; i < countryData.length; i++) {
+	            if (countryData[i].name === countryName) {
+	                return countryData[i].latlng;
+	            }
+	        }
+	    },
+	    updateDisplay: function(nada,context) {
+	        if (context.map) {
+	            context.map.clearMarkers();
+	        } else {
+	            context.map = new Map(document.getElementById("map"));
+	        }
+	        var curCountries = document.getElementById('current-countries');
+	        curCountries.innerHTML = "";
+	        document.getElementById('country-search').value = null;
+	        context.request.do("POST", "", function(rawData) {
+	            var data = JSON.parse(rawData);
+	            data = data[0];
+	            if (data) {
+	                for (var i = 0; i < data.countries.length; i++) {
+	                    var latlng = {lat:data.countries[i].latlng[0], lng:data.countries[i].latlng[1]};
+	                    context.map.addMarker(latlng, data.countries[i].country);
+	                    var li = document.createElement('li');
+	                    li.innerText = data.countries[i].country;
+	                    var del = document.createElement('b');
+	                    del.innerText = "X";
+	                    del.addEventListener('click', context.deleteCountry.bind(context));
+	                    li.appendChild(del);
+	                    curCountries.appendChild(li);
+	                }
+	            }
+	        }.bind(context), {user: localStorage.getItem("user")});
+	    },
+	    deleteCountry: function(e) {
+	        var country = e.target.parentNode.childNodes[0].nodeValue;
+	        this.request.do("DELETE", "country", this.updateDisplay, {user: localStorage.getItem("user"), country: country}, this);
+	    }
+	};
+	module.exports = Page;
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	var MainPage = function(page) {
+	    this.page = page;
+	};
+	
+	MainPage.prototype = {
+	    setup: function(data, context) {
 	        document.getElementById('content').innerHTML = data;
 	
 	        var countryData = JSON.parse(localStorage.getItem('countryData'));
@@ -369,25 +272,23 @@
 	                p.innerText = "Sorry no results...";
 	                span.appendChild(p);
 	            }
-	        }.bind(this));
-	        console.log('me', this);
-	        this.updateDisplay();
+	        }.bind(context));
+	        console.log(context);
+	        context.page.updateDisplay(null, context.page);
 	    },
 	    createListOption: function(countryName) {
 	        var p = document.createElement('p');
 	        p.innerText = countryName;
-	        p.addEventListener('click', pClickHandler);
+	        p.addEventListener('click', this.pClickHandler.bind(this));
 	        return p;
 	    },
 	    pClickHandler: function(e) {
 	        var me = e.target;
-	
 	        var countryData = {
 	            user: localStorage.getItem('user'),
-	            country: {country: me.innerText, latlng: findLatLng(me.innerText)}
+	            country: {country: me.innerText, latlng: this.findLatLng(me.innerText)}
 	        };
-	
-	        this.request.do("POST", "country", this.updateDisplay, countryData);
+	        this.request.do("POST", "country", this.updateDisplay, countryData, this);
 	        document.getElementById('country-options').innerHTML = null;
 	    },
 	    findLatLng: function(countryName) {
@@ -397,49 +298,10 @@
 	                return countryData[i].latlng;
 	            }
 	        }
-	    },
-	    updateDisplay: function() {
-	        if (this.map) {
-	            this.map.clearMarkers();
-	        } else {
-	            this.map = new Map(document.getElementById("map"));
-	        }
-	
-	        var curCountries = document.getElementById('current-countries');
-	        curCountries.innerHTML = "";
-	        document.getElementById('country-search').value = null;
-	
-	        this.request.do("POST", "", function(rawData) {
-	            var data = JSON.parse(rawData);
-	            data = data[0];
-	            if (data) {
-	                for (var i = 0; i < data.countries.length; i++) {
-	                    var latlng = {lat:data.countries[i].latlng[0], lng:data.countries[i].latlng[1]};
-	                    this.map.addMarker(latlng, data.countries[i].country);
-	
-	                    var li = document.createElement('li');
-	                    li.innerText = data.countries[i].country;
-	
-	                    var del = document.createElement('b');
-	                    del.innerText = "X";
-	                    del.addEventListener('click', this.deleteCountry);
-	
-	                    li.appendChild(del);
-	                    curCountries.appendChild(li);
-	
-	                }
-	            }
-	        }.bind(this), {user: localStorage.getItem("user")});
-	    },
-	    deleteCountry: function(e) {
-	        var country = e.target.parentNode.childNodes[0].nodeValue;
-	        this.request.do("DELETE", "country", this.updateDisplay, {user: localStorage.getItem("user"), country: country});
 	    }
-	
-	
 	};
 	
-	module.exports = Page;
+	module.exports = MainPage;
 
 
 /***/ }

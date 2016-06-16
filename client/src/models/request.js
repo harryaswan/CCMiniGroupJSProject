@@ -1,21 +1,16 @@
-var Request = function() {
-    this.test = "hello";
-};
-
+var Request = function() {};
 Request.prototype = {
-    do: function(type, url, callback, dataToSend) {
-        console.log(this.test);
+    do: function(type, url, callback, dataToSend, context) {
         var request = new XMLHttpRequest();
+        request.onload = function() {
+            if (request.status === 200) {
+                callback(this.responseText, context);
+            }
+        };
         request.open(type, url);
         if (type != "GET") {
             request.setRequestHeader('Content-Type', 'application/json');
         }
-        request.onload = function() {
-            if (request.status === 200) {
-                console.log('r',this);
-                callback(request.responseText);
-            }
-        };
         if (dataToSend) {
             dataToSend = JSON.stringify(dataToSend);
         } else {
@@ -31,6 +26,4 @@ Request.prototype = {
         }
     }
 };
-
-
 module.exports = Request;
