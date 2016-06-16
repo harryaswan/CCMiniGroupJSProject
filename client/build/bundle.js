@@ -80,7 +80,6 @@
 	    },
 	    clearMarkers: function() {
 	        for (var i = 0; i < this.markers.length; i++) {
-	            console.log('m', this.markers[i]);
 	            this.markers[i].setMap(null);
 	        }
 	        this.markers = [];
@@ -106,11 +105,12 @@
 	        if (type != "GET") {
 	            request.setRequestHeader('Content-Type', 'application/json');
 	        }
-	        if (dataToSend) {
-	            dataToSend = JSON.stringify(dataToSend);
-	        } else {
-	            dataToSend = null;
-	        }
+	        dataToSend = dataToSend ? JSON.stringify(dataToSend) : null;
+	        // if (dataToSend) {
+	        //     dataToSend = JSON.stringify(dataToSend);
+	        // } else {
+	        //     dataToSend = null;
+	        // }
 	        request.send(dataToSend);
 	    },
 	    grabCountryData: function() {
@@ -163,51 +163,6 @@
 	            localStorage.setItem('user', username.toLowerCase());
 	            context.mainCallback();
 	        }.bind(Page));
-	    },
-	    // setupMain: function(data, context) {
-	    //     document.getElementById('content').innerHTML = data;
-	    //
-	    //     var countryData = JSON.parse(localStorage.getItem('countryData'));
-	    //     var searchBox = document.getElementById('country-search');
-	    //
-	    //     searchBox.addEventListener('keyup', function(e) {
-	    //         var span = document.getElementById('country-options');
-	    //         span.innerHTML = null;
-	    //         for (var i = 0; i < countryData.length; i++) {
-	    //             if (countryData[i].name.toLowerCase().indexOf(searchBox.value.toLowerCase()) > -1) {
-	    //                 span.appendChild(context.createListOption(countryData[i].name));
-	    //             }
-	    //         }
-	    //         if (span.childNodes.length === 0) {
-	    //             var p = document.createElement('p');
-	    //             p.innerText = "Sorry no results...";
-	    //             span.appendChild(p);
-	    //         }
-	    //     }.bind(this));
-	    //     context.updateDisplay(null, context);
-	    // },
-	    createListOption: function(countryName) {
-	        var p = document.createElement('p');
-	        p.innerText = countryName;
-	        p.addEventListener('click', this.pClickHandler.bind(this));
-	        return p;
-	    },
-	    pClickHandler: function(e) {
-	        var me = e.target;
-	        var countryData = {
-	            user: localStorage.getItem('user'),
-	            country: {country: me.innerText, latlng: this.findLatLng(me.innerText)}
-	        };
-	        this.request.do("POST", "country", this.updateDisplay, countryData, this);
-	        document.getElementById('country-options').innerHTML = null;
-	    },
-	    findLatLng: function(countryName) {
-	        var countryData = JSON.parse(localStorage.getItem('countryData'));
-	        for (var i = 0; i < countryData.length; i++) {
-	            if (countryData[i].name === countryName) {
-	                return countryData[i].latlng;
-	            }
-	        }
 	    },
 	    updateDisplay: function(nada,context) {
 	        if (context.map) {
@@ -273,7 +228,6 @@
 	                span.appendChild(p);
 	            }
 	        }.bind(context));
-	        console.log(context);
 	        context.page.updateDisplay(null, context.page);
 	    },
 	    createListOption: function(countryName) {
@@ -288,7 +242,7 @@
 	            user: localStorage.getItem('user'),
 	            country: {country: me.innerText, latlng: this.findLatLng(me.innerText)}
 	        };
-	        this.request.do("POST", "country", this.updateDisplay, countryData, this);
+	        this.page.request.do("POST", "country", this.page.updateDisplay, countryData, this.page);
 	        document.getElementById('country-options').innerHTML = null;
 	    },
 	    findLatLng: function(countryName) {

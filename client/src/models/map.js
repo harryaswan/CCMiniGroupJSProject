@@ -13,7 +13,6 @@ Map.prototype ={
     },
     clearMarkers: function() {
         for (var i = 0; i < this.markers.length; i++) {
-            console.log('m', this.markers[i]);
             this.markers[i].setMap(null);
         }
         this.markers = [];

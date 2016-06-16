@@ -23,7 +23,6 @@ MainPage.prototype = {
                 span.appendChild(p);
             }
         }.bind(context));
-        console.log(context);
         context.page.updateDisplay(null, context.page);
     },
     createListOption: function(countryName) {
@@ -38,7 +37,7 @@ MainPage.prototype = {
             user: localStorage.getItem('user'),
             country: {country: me.innerText, latlng: this.findLatLng(me.innerText)}
         };
-        this.request.do("POST", "country", this.updateDisplay, countryData, this);
+        this.page.request.do("POST", "country", this.page.updateDisplay, countryData, this.page);
         document.getElementById('country-options').innerHTML = null;
     },
     findLatLng: function(countryName) {

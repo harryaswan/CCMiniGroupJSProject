@@ -11,11 +11,12 @@ Request.prototype = {
         if (type != "GET") {
             request.setRequestHeader('Content-Type', 'application/json');
         }
-        if (dataToSend) {
-            dataToSend = JSON.stringify(dataToSend);
-        } else {
-            dataToSend = null;
-        }
+        dataToSend = dataToSend ? JSON.stringify(dataToSend) : null;
+        // if (dataToSend) {
+        //     dataToSend = JSON.stringify(dataToSend);
+        // } else {
+        //     dataToSend = null;
+        // }
         request.send(dataToSend);
     },
     grabCountryData: function() {
